@@ -64,11 +64,11 @@ paging.render(document.getElementById('pagination-container'));
 	```jsx
 	digitRenderCallback(pageNumber) {
 	if (pageNumber === 1) {
-			return‘⬅️’;
+			return‘⬅’;
 		} else if (pageNumber === this.pages) {
-			return ‘➡️’;
+			return ‘⬅️:’;
 		} else {
-			return‘’;
+			return ‘➡️:’;
 		}
 	},
 	```
