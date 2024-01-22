@@ -1,0 +1,627 @@
+<h1>Настройка визуального представления компонента "Постраничная навигация" (Paging )</h1>
+<p>В данной статье мы рассмотрим компонент "Постраничная навигация" и его возможности для настройки визуального представления. Компонент "Постраничная навигация" представляет собой мощный инструмент, который позволяет разработчикам реализовывать пагинацию в веб-приложениях. С помощью этого компонента возможно улучшить пользовательский опыт, разделяя большие наборы данных на более управляемые страницы.</p>
+<h2>Установка и импорт компонента</h2>
+<p>Прежде чем приступить к настройке, убедитесь, что у вас установлен пакет <code>wasaby-controls</code>, содержащий компонент "Постраничная навигация". Для установки выполните следующую команду:</p>
+<pre><code class="language-bash">npm install wasaby-controls
+</code></pre>
+<p>После установки компонента, импортируйте его в вашем приложении:</p>
+<pre><code class="language-jsx">import { Paging } from 'wasaby-controls';
+</code></pre>
+<h2>Основные возможности</h2>
+<h3>1. Создание экземпляра компонента</h3>
+<p>Компонент "Постраничная навигация" предлагает набор элементов управления пагинацией, которые позволяют пользователям перемещаться по разным страницам данных. Эти элементы управления включают "Предыдущая страница", "Следующая страница" и возможность напрямую переходить на конкретную страницу.</p>
+<pre><code class="language-jsx">import { Paging } from 'wasaby-dev/Controls';
+
+// Создаем экземпляр компонента "Постраничная навигация"
+const paging = new Paging();
+
+// Рендерим элементы управления пагинацией
+paging.render(document.getElementById('pagination-container'));
+</code></pre>
+<p>Приведенный выше код демонстрирует создание экземпляра компонента "Постраничная навигация" и его последующий рендеринг в определенном контейнере на веб-странице.</p>
+<h1></h1>
+<h3>2. Опции для настройки пагинации</h3>
+<ol>
+<li>
+<p><strong>arrowState</strong> - управляет возможностью показа/скрытия стрелок-кнопок в пэйджинге, которые указывают на предыдущую и следующую страницы. Если значение этой опции установлено в false, стрелки не отображаются. Пример настройки:</p>
+<pre><code class="language-jsx">arrowState: false
+</code></pre>
+</li>
+<li>
+<p><strong>contentTemplate</strong> - управляет отображением произвольного HTML-шаблона внутри пэйджинга, что позволяет пользователю настроить внешний вид компонента по своему усмотрению. Например, можно добавить дополнительные элементы, такие как иконки, текст или изображения.</p>
+<pre><code class="language-jsx">contentTemplate: ‘&lt;div class=“custom-template”&gt;Страница #:page &lt;/div&gt;’
+</code></pre>
+</li>
+<li>
+<p><strong>contrastBackground</strong> определяет контрастность фона кнопки по отношению к его окружению. Это полезно для создания более заметных кнопок на фоне.
+Значение может быть установлено в <em>true</em> или <em>false</em>. Если установлено значение <em>false</em>, фон кнопки будет того же цвета, что и его окружение.</p>
+<pre><code class="language-jsx">contrastBackground: true
+</code></pre>
+</li>
+<li>
+<p><strong>digitRenderCallback</strong> позволяет задавать отображение эмодзи вместо чисел страниц. Эта опция представляет собой функцию, которая устанавливает соответствие между номером страницы и определенным эмодзи. Например, вы можете использовать эту опцию для отображения смайликов вместо номеров страниц:</p>
+<pre><code class="language-jsx">digitRenderCallback(pageNumber) {
+if (pageNumber === 1) {
+        return‘⬅️’;
+    } else if (pageNumber === this.pages) {
+        return ‘➡️’;
+    } else {
+        return‘’;
+    }
+},
+</code></pre>
+</li>
+<li>
+<p><strong>elementsCount</strong> задает количество элементов, которое должно отображаться на каждой странице. Это полезно, если вы хотите ограничить количество элементов на странице, чтобы улучшить производительность вашего приложения.</p>
+<pre><code class="language-jsx">elementsCount: 10
+</code></pre>
+</li>
+<li>
+<p><strong>notLoadThemes</strong> флаг, который отключает загрузку переменных темы оформления для контролей.
+Если вы не хотите, чтобы ваш компонент наследовал тему оформления из родительского элемента, вы можете отключить загрузку переменных темы, установив флаг notLoadThemes в <em>true</em>. Это может быть полезно, если необходимо использовать свой собственный стиль для вашего компонента. Вот пример использования этой опции:</p>
+<pre><code class="language-jsx">import {Paging} from “@wasaby - ui / controls”;
+
+function MyComponent() {
+    return ( &lt; Paging notLoadThemes = {
+        true
+    }
+    pagesCount = {
+        5
+    }
+    pagingMode = “simple”selectedPage = {
+        1
+    }
+    showDigits = {
+        false
+    }
+    theme = “light” / &gt;);
+}
+</code></pre>
+</li>
+<li>
+<p><strong>pagesCount</strong>: Размер страницы</p>
+<p>Параметр pagesCount позволяет определить количество страниц, которое будет отображаться в постраничном навигаторе. По умолчанию установлено значение 10, но вы можете изменить его в соответствии с вашими требованиями. Вот пример изменения размера страницы:</p>
+<pre><code class="language-jsx">import { Paging } from “@wasaby-ui/controls”;
+
+function MyComponent() {
+    return ( &lt; Paging pagesCount = {
+        7
+    }
+    pagingMode = “simple”
+    selectedPage = {
+        4
+    }
+    showDigits = {
+        true
+    }
+    theme = “dark” / &gt;);
+}
+</code></pre>
+</li>
+<li>
+<p><strong>pagingMode</strong>: Внешний вид постраничной навигации</p>
+<p>Опция pagingMode позволяет определить внешний вид постраничного навигатора. Существует три возможных значения: simple, advanced и custom.</p>
+<ul>
+<li><strong>Simple</strong> отображает только номера страниц и выбранную страницу.</li>
+<li><strong>Advanced</strong> отображает номера страниц, выбранную страницу и общее количество страниц.</li>
+<li><strong>Custom</strong> позволяет определить стиль каждой части навигатора с помощью CSS.</li>
+</ul>
+<p>Вот пример использования опции pagingMode для выбора внешнего вида постраничного навигатора:</p>
+<pre><code class="language-jsx">import { Paging, PagingMode } from “@wasaby-ui/controls”;
+
+function MyComponent() {
+    return ( &lt; Paging pagingMode = {
+        PagingMode.advanced
+    } &gt; pagesCount = {
+        10
+    }
+    selectedPage = {
+        3
+    }
+    showDigits = {
+        true
+    }
+    theme = “custom” &lt; /Paging&gt;
+);
+}
+</code></pre>
+</li>
+<li>
+<p><strong>selectedPage</strong>: Номер выбранной страницы</p>
+<p>Эта опция позволяет определить номер выбранной страницы в постраничном навигаторе. Если этот параметр не задан, то постраничный навигатор будет отображать первую страницу. Вот пример настройки номера выбранной страницы:</p>
+<pre><code class="language-jsx">import { Paging } from “@wasaby–ui/controls”;
+
+function MyComponent() {
+    return ( &lt; Paging pagesCount = {
+        15
+    }
+    selectedPage = {
+        5
+    }
+    showDigits = {
+        true
+    } &gt; theme = “light” &lt; /Paging&gt;
+);
+}
+</code></pre>
+</li>
+<li>
+<p><strong>showDigits</strong>: Отображать кнопки с номерами страниц</p>
+<p>Параметр showDigits определяет, будут ли отображаться кнопки с номерами страниц в постраничном навигаторе. Значения могут быть <em>true</em> или <em>false</em>.</p>
+<p>По умолчанию значение равно <em>true</em>, что означает, что кнопки с номерами страниц будут отображаться. Вот пример отключения отображения кнопок с номерами страниц:</p>
+<pre><code class="language-jsx">import { Paging } from “@wasaby-ui/controls”;
+
+function MyComponent() {
+    return ( &lt; Paging pagesCount = {
+        50
+    }
+    selectedPage = {
+        25
+    }
+    showDigits = {
+        false
+    } &gt; theme = “dark” &lt; /Paging&gt;
+);
+}
+</code></pre>
+</li>
+<li>
+<p><strong>theme</strong>: Название темы оформления</p>
+<p>Параметр theme позволяет выбрать тему оформления для вашего постраничного навигатора из списка доступных тем. Вот пример выбора темы оформления:</p>
+<pre><code class="language-jsx">import { Paging } from “@wasaby-ui/controls”;
+
+function MyComponent() {
+    return ( &lt; Paging pagesCount = {
+        20
+    }
+    selectedPage = {
+        10
+    } &gt; showDigits = {
+        true
+    }
+    theme = “custom” &lt; /Paging&gt;
+);
+}
+</code></pre>
+</li>
+</ol>
+<h1></h1>
+<h3>3. Поля</h3>
+<h4>Название компонента в библиотечной нотации</h4>
+<p>В поле <strong>_$moduleNameInLibrary</strong> указывается имя модуля компонента в формате X.Y, где X - имя библиотеки, а Y - имя компонента внутри этой библиотеки. Это поле используется для корректного отображения компонента в библиотеке.</p>
+<pre><code class="language-jsx">_$moduleNameInLibrary: 'my-library.paging',
+</code></pre>
+<h4>Список зарегистрированных обработчиков _notify</h4>
+<p>Поле <strong>_needRemoveBeforeUnmount</strong> содержит список функций, которые должны быть вызваны перед размонтированием компонента. Это необходимо для очистки ресурсов, используемых компонентом.</p>
+<pre><code class="language-jsx">  _needRemoveBeforeUnmount: [
+    () =&gt; {
+      // код для очистки ресурсов
+    },
+  ],
+</code></pre>
+<h4>Опции декорирования</h4>
+<p>Поле <strong>_decOptions</strong> используется для определения опций декорирования компонента. Декорирование - это процесс добавления дополнительных свойств и методов к базовому классу. В нашем случае, это позволяет добавить дополнительные стили или поведение к компоненту.</p>
+<p>Например, мы можем определить стиль для кнопки “Предыдущая страница”:</p>
+<pre><code class="language-jsx"> _decOptions: {
+    style: {
+      previousButton: {
+        backgroundColor: 'red',     // присвоили фону красный цвет
+      },
+    },
+ },
+</code></pre>
+<h4>Логический родитель</h4>
+<p>Поле <strong>_logicParent</strong> определяет логического родителя компонента. Это может быть использовано для добавления зависимостей или для передачи данных между компонентами.</p>
+<p>Пример использования логического родителя для передачи данных:</p>
+<pre><code class="language-jsx">const {
+    createElement,
+    Component
+} = window.React;
+
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+        };
+    }
+
+    componentDidMount() {
+        fetch(‘https: //jsonplaceholder.typicode.com/posts’)
+        .then((response) = &gt;response.json()).then((data) = &gt;{
+            this.setState({
+                data
+            });
+        });
+    }
+
+    render() {
+        return ( &lt; div &gt; &lt;PagingList data = {
+            this.state.data
+        }
+        /&gt;
+&lt;/div &gt; );
+    }
+}
+
+function PagingList({
+    data
+}) {
+    const {
+        page,
+        pageSize,
+        totalItems,
+        items,
+        onPageSizeChange,
+        onPageChange
+    } = useStatePaging({
+        page,
+        pageSize,
+        totalItems,
+        items,
+    });
+
+    return ( &lt; Paging logicParent = {
+        App
+    }
+    onPageSizeChange = {
+        onPageSizeChange
+    }
+    onPageChange = {
+        onPageChange
+    }
+    /&gt;
+);
+}
+</code></pre>
+<p>В этом примере, компонент PagingList передает данные о списке постов (state.data) компоненту Paging через логического родителя. Таким образом, компонент Paging может обновлять список постов при изменении страницы или размера страницы.</p>
+<h4>Передача параметров (_oldOptions)</h4>
+<p>Опции, которые были до рендеринга контрола, могут быть переданы как параметр в следующие хуки жизненного цикла: _afterRender и _afterUpdate.
+Пример кода:</p>
+<pre><code class="language-jsx">&lt;Paging
+    oldOptions={{
+        pageSizes: [10, 20, 30],
+        pageSize: 10
+    }}
+/&gt;
+</code></pre>
+<h4>Стили (_styles)</h4>
+<p>Поле  <strong>_styles</strong> содержит массив названий нетематизированных стилей, которые необходимы контролу. Стили будут загружены при создании компонента.
+Пример:</p>
+<pre><code class="language-jsx">styles={['my-style', 'another-style']}
+</code></pre>
+<p>Здесь названия стилей должны быть заданы с префиксом “wasaby-”.</p>
+<h4>Тема (_theme)</h4>
+<p>Аналогично предыдущему пункту, это массив имен тематизированных стилей, которые нужны контролу.
+Пример использования:</p>
+<pre><code class="language-jsx">theme={['myTheme', 'anotherTheme']}
+</code></pre>
+<h4>Перенос всех дочерних элементов элемента-родителя в начало его содержимого</h4>
+<p><strong>_transferChildrenToParent</strong> - эта опция используется для переноса _children родителя из обертки над чистым React, чтобы он работал.
+Пример кода:</p>
+<pre><code class="language-jsx">transferChildrenToParent={true}
+</code></pre>
+<h4>Дети (children)</h4>
+<p>Все дети контрола, которые имеют атрибут name. Примером может служить следующий код:</p>
+<pre><code class="language-jsx">&lt;PagingContext&gt;
+  &lt;PagingControl name="home" /&gt;
+  &lt;PagingControl name="about" /&gt;
+&lt;/PagingContext&gt;;
+</code></pre>
+<h4>Контекст (contexType)</h4>
+<p>Контекст с двумя опциями: <em>ReadOnly</em> и <em>Theme</em>.</p>
+<p>Контекст — это механизм, который позволяет передавать информацию между компонентами без использования пропсов.</p>
+<p><em>ReadOnly</em> используется для указания, является ли контрол доступным только для чтения или нет.</p>
+<pre><code class="language-jsx">{ readonly: true, }
+</code></pre>
+<p><em>Theme</em> — это объект, который содержит информацию о стилях для контрола. Примерами могут быть:</p>
+<pre><code class="language-jsx">{ theme: { backgroundColor: 'red', color: 'white', }, }
+</code></pre>
+<h4>Отции контрола (options)</h4>
+<p>Options - это реальные опции, которые можно настроить. Эти опции собираются из props, но могут не всегда совпадать с ними, чтобы обеспечить правильные значения в хуках. Опции можно настроить с помощью следующих полей:</p>
+<ul>
+<li>currentPage: номер текущей страницы.</li>
+<li>pageSize: количество элементов на странице.</li>
+<li>totalCount: общее количество элементов.</li>
+<li>pageCount: количество страниц.</li>
+<li>onChange: функция, вызываемая при изменении текущей страницы.</li>
+</ul>
+<p>Пример:</p>
+<pre><code class="language-jsx">const onChange = (page) =&gt; { // обработать изменение текущей страницы };
+</code></pre>
+<h4>Шаблон (template)</h4>
+<p>Шаблон контрола позволяет определить, как будет выглядеть контрол. Например, можно добавить кнопки вперед/назад, кнопки для изменения количества элементов на странице и т.д. Вот пример кода с комментариями:</p>
+<pre><code class="language-jsx">&lt;PagingTemplate&gt;
+  &lt;!-- Добавляем кнопки "вперед" и "назад" --&gt; 
+{ ({
+        currentPage,
+        pageSize,
+        totalCount,
+        onChange
+    }) = &gt;( &lt; div &gt; &lt;button type = “button”onClick = { () = &gt;onChange(currentPage - 1)
+    } &gt; Назад &lt; /button&gt;
+&lt;span&gt;Страница {currentPage}&lt;/span &gt; /
+&lt;span&gt;{pageCount}&lt;/span &gt;
+
+    &lt;button type = "button"onClick = { () = &gt;onChange(currentPage + 1)
+    } &gt; Вперед &lt; /button&gt;
+&lt;/div &gt; )
+} &lt; /PagingTemplate&gt;;
+</code></pre>
+<h1></h1>
+<h3>4. Методы компонента "Постраничная навигация"</h3>
+<h4>_afterMount</h4>
+<p><strong>_afterMount</strong> - хук жизненного цикла контрола. Этот метод вызывается сразу после того, как компонент был установлен в DOM. Он позволяет выполнить дополнительные действия после интеграции компонента в страницу.</p>
+<pre><code class="language-jsx">import { Paging } from 'wasaby.dev';
+
+function App() {
+  return (
+    &lt;Paging afterMount={() =&gt; {
+      // Выполняем дополнительные действия, такие как добавление стилей или скриптов
+    }} /&gt;
+  );
+}
+</code></pre>
+<h4>_afterRender</h4>
+<p><strong>_afterRender</strong> - хук жизненного цикла контрола.
+Этот метод выполняется синхронно после применения изменений к DOM и перед тем, как браузер начнет отрисовывать страницу.</p>
+<pre><code class="language-jsx">&lt;Paging
+  afterRender={(node) =&gt; {
+    // Применяем стили к компоненту после его рендеринга
+  }}
+/&gt;
+</code></pre>
+<h4>_afterUpdate</h4>
+<p><strong>_afterUpdate</strong> - асинхронный хук жизненного цикла контрола.</p>
+<p>Метод вызывается после того, как состояние компонента было обновлено. Это асинхронный метод, который ожидает завершения обновления состояния компонента.</p>
+<pre><code class="language-jsx">// Обновляем состояние компонента при вызове метода
+this.setState({
+  data: newData
+});
+
+// Вызываем afterUpdate после обновления состояния
+this.afterUpdate(() =&gt; {
+  // Здесь выполняем дополнительные действия после обновления компонента
+});
+</code></pre>
+<h4>_beforeMount</h4>
+<p><strong>_beforeMount</strong> - хук жизненного цикла контрола.</p>
+<p>Этот хук вызывается перед интеграцией компонента в DOM, что позволяет разработчику выполнить предварительные действия перед интеграцией.</p>
+<p>В примере ниже показано, как использовать _beforeMount для проверки наличия необходимых данных перед интеграцией компонента:</p>
+<pre><code class="language-jsx">function App(props) {
+  const [data, setData] = useState(null);
+
+  function checkData() {
+    if (data) {
+      return;
+    }
+
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response =&gt; response.json())
+      .then((json) =&gt; {
+        setData(json);
+      });
+  }
+
+  useEffect(() =&gt; {
+    checkData();  
+}, []);
+
+if (!data) {
+return null;
+}
+return &lt;Paging
+beforeMount={checkData}
+data={data}
+/&gt;;
+}
+</code></pre>
+<h4>_beforeRender</h4>
+<p>Первый хук жизненного цикла контрола и единственный хук, который вызывается как на стороне сервера, так и на стороне клиента.</p>
+<p>Он вызывается до рендеринга шаблона, поэтому обычно используется для подготовки данных для шаблона.</p>
+<p>Пример использования _beforeRender:</p>
+<pre><code class="language-jsx">import React, { useState } from "react";
+import { Paging } from "@wasaby/react-paging";
+
+function PageNavigation() {
+  const [currentPage, setCurrentPage] = useState(0);
+
+  // Устанавливаем начальное значение текущей страницы
+  useEffect(() =&gt; {
+    setCurrentPage(0); 
+  }, []);
+
+  return (
+    &lt;div&gt;
+      &lt;Paging
+        pageSize={10} // Количество элементов на странице
+        totalItems={100} // Общее количество элементов
+        currentPage={currentPage} // Текущая страница   
+onPageChange={newPage =&gt; setCurrentPage(newPage)} // Реагируем на изменение текущей страницы
+beforeRender={() =&gt; setCurrentPage(5)} // Изменяем текущую страницу после рендера на 5
+/&gt;
+&lt;/div&gt;
+);
+}
+</code></pre>
+<h4>_beforeUnmount</h4>
+<p>Это последний хук жизненного цикла контрола. Контрол не будет существовать после вызова этого хука.</p>
+<p>Служит для очистки состояния контрола, отписок от событий и т.д. После вызова этого метода любое взаимодействие с контролом (обращения к свойствам, вызовы методов и т.д.) является ошибкой.</p>
+<p>В этом методе не нужно зачищать поля контрола, т.к. Wasaby делает это автоматически.</p>
+<h4>_beforeUpdate</h4>
+<p>Служит для изменения состояния в ответ на изменение опций. Старые опции доступны на this._options, новые приходят первым аргументом.</p>
+<p>Вызывается перед тем, как контрол обновится с новыми опциями. Вызывается после каждого обновления состояния контрола.</p>
+<p>Не забывайте сравнивать старые и новые опции перед изменением состояния.
+Пример использования:</p>
+<pre><code class="language-jsx">function PageNavigation({
+    totalItems,
+    pageSize
+}) {
+    // Текущая страница, которая обновляется при изменении страницы
+    const[currentPage, setCurrentPage] = React.useState(0);
+    React.useEffect(() = &gt;{
+        // Инициализируем данные при монтировании
+        setTimeout(() = &gt;setCurrentPage((pageSize * 2) - 1), 500);
+    },
+    []);
+
+    const handlePageChange = newPage = &gt;{
+        if (newPage !== currentPage) {
+            setCurrentPage(newPage);
+        }
+    };
+
+    const beforeUpdate = () = &gt;{
+        // Изменяем данные после изменения страницы
+        setCurrentPage((currentPage + 1));
+    };
+
+    return ( &lt; &gt;{
+        /* Отображаем постраничную навигацию */
+    } &lt; div &gt; &lt;Paging pageSize = {
+        pageSize
+    }
+    totalItems = {
+        totalItems
+    }
+    currentPage = {
+        currentPage
+    }
+    onPageChange = {
+        handlePageChange
+    }
+    beforeUpdate = {
+        beforeUpdate
+    }
+    /&gt;
+&lt;/div &gt; &lt;/&gt;
+);
+}
+</code></pre>
+<h4>_componentDidMount</h4>
+<p>Синхронный хук жизненного цикла контрола. Вызывается сразу после установки контрола в DOM-окружение.</p>
+<p>Первый хук жизненного цикла контрола, который вызывается после подключения контрола к DOM-окружению.</p>
+<p>На этом этапе вы можете получить доступ к параметрам и контексту this._options.</p>
+<p>Этот хук жизненного цикла часто используется для доступа к DOM-элементам и подписки на события сервера.</p>
+<p>Пример:</p>
+<pre><code class="language-jsx">_componentDidMount(){
+  this.setState({ isMounted: true });
+  console.log("Component mounted successfully");
+}
+</code></pre>
+<p>В этом примере мы используем _componentDidMount для установки состояния isMounted в true и вывода сообщения в консоль при первом монтировании компонента в DOM.</p>
+<h4>_shouldUpdate</h4>
+<p>Метод <strong>_shouldUpdate</strong> используется для определения того, должен ли текущий контрол быть обновлен. Он вызывается каждый раз до того, как контроллер будет обновлен. Если метод возвращает <em>true</em>, то контроллер будет обновлен, если же он возвращает <em>false</em>, то обновление контроллера будет пропущено.</p>
+<pre><code class="language-jsx">_shouldUpdate(nextProps, nextState) {
+  return nextProps.someProp !== this.props.someProp;
+}
+</code></pre>
+<h4>activate</h4>
+<p>Метод <strong>activate</strong> используется для активации контрола. Он может быть использован для выполнения каких-либо действий при активации контрола или для инициализации каких-либо переменных.</p>
+<pre><code class="language-jsx">activate() {
+  // ...
+}
+</code></pre>
+<h4>createControl</h4>
+<p>Метод <strong>createControl</strong> используется для создания контрола и монтирования его на указанный элемент. Он принимает элемент DOM и опции контрола в качестве аргументов и возвращает созданный контрол.</p>
+<pre><code class="language-jsx">const control = createControl(element, {
+  data: this.state.data,
+  onDataChange: this.onDataChange,
+});
+</code></pre>
+<h4>extend</h4>
+<p>Старый способ наследования, позволяющий наследоваться от родительского класса и переопределять его методы и свойства.
+Пример использования:</p>
+<pre><code class="language-jsx">import { Paging } from "wasaby.dev";  
+
+class CustomPaging extends Paging {  
+  constructor(props) {  
+    super(props);  
+  }  
+  
+  render() {  
+    return (  
+      &lt;div&gt;  
+        My custom Paging component  
+      &lt;/div&gt;  
+    );  
+  }  
+}  
+</code></pre>
+<h4>loadCSS</h4>
+<p><strong>loadCSS</strong> - это метод, используемый для загрузки стилей и тем контролов. Он принимает путь к CSS файлу и опциональный объект опций в качестве параметров и загружает указанный CSS файл.</p>
+<p>Вот пример его использования:</p>
+<pre><code class="language-jsx">import { loadCSS } from "wasaby.dev"
+
+// Загрузка CSS файла
+loadCSS("path/to/your.css")
+
+// Использование опций
+loadCSS("path/to/your.css", {
+  minify: true,
+})
+</code></pre>
+<h4>mountToDom</h4>
+<p>Для обратной совместимости не рекомендуется использовать <strong>mountToDom</strong>.</p>
+<p>Вот пример использования:</p>
+<pre><code class="language-jsx">import { mountToDom } from ‘wasaby.dev’;
+
+const element = document.getElementById(‘root’);
+
+mountToDom(element);
+</code></pre>
+<h4>saveOptions</h4>
+<p>Для обратной совместимости не рекомендуется использовать <strong>saveOptions</strong>.</p>
+<p>Вот пример его использования:</p>
+<pre><code class="language-jsx">import { saveOptions } from ‘wasaby.dev’;
+
+saveOptions({
+debug: true, // Отладка
+production: false // Производство
+});
+</code></pre>
+<h1></h1>
+<h3>5. События</h3>
+<p>Помимо возможности настройки внешнего вида, компонент "Постраничная навигация" поддерживает события, которые позволяют обрабатывать различные действия пользователя:</p>
+<ol>
+<li>
+<p>Активированное событие (<strong>activated</strong>) происходит, когда пользователь активирует контрол. Это может быть, например, клик по кнопке перехода на страницу или прокрутка колесика мыши.</p>
+<p>Пример использования:</p>
+<pre><code class="language-jsx">pagingControl.on(‘activated’, function(e) {
+console.log(‘Активирован контрол’);
+});
+```jsx 
+</code></pre>
+</li>
+<li>
+<p>Деактивированное событие (<strong>deactivated</strong>) происходит при деактивации контрола, например при потере фокуса.</p>
+<p>Пример использования:</p>
+<pre><code class="language-jsx">pagingControl.on(‘deactivated’, function(e) {
+console.log(‘Деактивирован контрол’);
+});
+</code></pre>
+</li>
+<li>
+<p>Событие <strong>onArrowClick</strong> происходит при клике по кнопкам навигации: первая страница, последняя страница, следующая страница или предыдущая страница.</p>
+<p>Пример использования:</p>
+<pre><code class="language-jsx">var page = 1;
+pagingControl.onArrowClick = function(direction, page) {   
+page = page;
+console.log("Нажали на стрелку: " + direction + ", текущая страница: " + page);
+};
+</code></pre>
+</li>
+</ol>
+<h3>6. Использование тайпдефов для изменения названия кнопок</h3>
+<p>Для изменения названий кнопок можно использовать тайпдефы.</p>
+<p>Например, чтобы изменить название кнопки “Назад” на “Previous”, вы можете определить тайпдеф следующим образом:</p>
+<pre><code class="language-jsx">interface PagingButtonName extends Paging['ButtonName'] {
+  Prev: 'Previous';
+}
+В этом случае, при создании экземпляра класса Paging, необходимо указать тип названия кнопки:
+
+const paging: Paging &amp; PagingButtonName = new Paging();
+Вариант значения “Next” будет отображаться как “Next”. В следующем примере кнопка “Назад” будет называться “Previous”:
+
+&lt;Button onClick={paging.prev}&gt;Previous&lt;/Button&gt;
+</code></pre>
